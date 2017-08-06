@@ -1,12 +1,13 @@
 import React from "react";
 import { withRouter } from "react-router";
 import { graphql, gql } from "react-apollo";
+import PropTypes from "prop-types";
 
 class CreatePost extends React.Component {
   static propTypes = {
-    router: React.PropTypes.object,
-    mutate: React.PropTypes.func,
-    data: React.PropTypes.object
+    router: PropTypes.object,
+    mutate: PropTypes.func,
+    data: PropTypes.object
   };
 
   state = {
@@ -41,11 +42,7 @@ class CreatePost extends React.Component {
             onChange={e => this.setState({ imageUrl: e.target.value })}
           />
           {this.state.imageUrl &&
-            <img
-              src={this.state.imageUrl}
-              role="presentation"
-              className="w-100 mv3"
-            />}
+            <img src={this.state.imageUrl} alt="post" className="w-100 mv3" />}
           {this.state.description &&
             this.state.imageUrl &&
             <button

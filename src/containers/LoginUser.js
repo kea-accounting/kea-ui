@@ -1,12 +1,13 @@
 import React from "react";
 import { withRouter } from "react-router";
 import { graphql, gql } from "react-apollo";
+import PropTypes from "prop-types";
 
 class CreateLogin extends React.Component {
   static propTypes = {
-    router: React.PropTypes.object.isRequired,
-    signinUser: React.PropTypes.func.isRequired,
-    data: React.PropTypes.object.isRequired
+    router: PropTypes.object.isRequired,
+    signinUser: PropTypes.func.isRequired,
+    data: PropTypes.object.isRequired
   };
 
   state = {

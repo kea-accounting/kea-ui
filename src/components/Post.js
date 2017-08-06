@@ -1,8 +1,9 @@
 import React from "react";
+import PropTypes from "prop-types";
 
 export default class Post extends React.Component {
   static propTypes = {
-    post: React.PropTypes.object
+    post: PropTypes.object
   };
 
   render() {

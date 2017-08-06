@@ -4,11 +4,12 @@ import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import ListPage from "./containers/ListPage";
 import NewPostLink from "./components/NewPostLink";
+import PropTypes from "prop-types";
 
 class App extends React.Component {
   static propTypes = {
-    router: React.PropTypes.object.isRequired,
-    data: React.PropTypes.object.isRequired
+    router: PropTypes.object.isRequired,
+    data: PropTypes.object.isRequired
   };
 
   _logout = () => {
