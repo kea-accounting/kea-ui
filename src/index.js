@@ -4,12 +4,15 @@ import App from "./App";
 import CreatePost from "./containers/CreatePost";
 import CreateUser from "./containers/CreateUser";
 import LoginUser from "./containers/LoginUser";
+import Nav from "./components/Nav";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import {
   ApolloClient,
   ApolloProvider,
   createNetworkInterface
 } from "react-apollo";
+import "./index.css";
+import "@blueprintjs/core/dist/blueprint.css";
 
 const networkInterface = createNetworkInterface({
   uri: "https://api.graph.cool/simple/v1/cj60zjzb1jhfu0198t94wd7gr"
@@ -39,6 +42,7 @@ ReactDOM.render(
   <ApolloProvider client={client}>
     <Router>
       <div>
+        <Nav />
         <Route path="/" component={App} />
         <Route path="/create" component={CreatePost} />
         <Route path="/login" component={LoginUser} />
