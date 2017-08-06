@@ -1,0 +1,30 @@
+# project: cj60zjzb1jhfu0198t94wd7gr
+# version: 2
+
+type Post implements Node {
+  description: String!
+  imageUrl: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+}
+
+type User implements Node {
+  name: String!
+  email: String!
+  emailSubscription: Boolean!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  updatedAt: DateTime!
+}
+
+type File implements Node {
+  contentType: String!
+  createdAt: DateTime!
+  id: ID! @isUnique
+  name: String!
+  secret: String! @isUnique
+  size: Int!
+  updatedAt: DateTime!
+  url: String! @isUnique
+}
