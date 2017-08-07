@@ -1,6 +1,5 @@
 import React from "react";
 import { graphql, gql } from "react-apollo";
-import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 
