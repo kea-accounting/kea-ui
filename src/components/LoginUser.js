@@ -2,6 +2,14 @@ import React from "react";
 import { withRouter } from "react-router";
 import { graphql, gql } from "react-apollo";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+
+const Aligner = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+`;
 
 class CreateLogin extends React.Component {
   static propTypes = {
@@ -27,32 +35,53 @@ class CreateLogin extends React.Component {
     }
 
     return (
-      <div className="w-100 pa4 flex justify-center">
-        <div style={{ maxWidth: 400 }} className="">
-          <input
-            className="w-100 pa3 mv2"
-            value={this.state.email}
-            placeholder="Email"
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <input
-            className="w-100 pa3 mv2"
-            type="password"
-            value={this.state.password}
-            placeholder="Password"
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-
-          {this.state.email &&
-            this.state.password &&
-            <button
-              className="pa3 bg-black-10 bn dim ttu pointer"
-              onClick={this.signinUser}
-            >
-              Log in
-            </button>}
-        </div>
-      </div>
+      <Aligner>
+        <form>
+          <div className="pt-form-group">
+            <label className="pt-label" for="username">
+              Username
+              <span className="pt-text-muted">(required)</span>
+            </label>
+            <div className="pt-form-content">
+              <input
+                id="username"
+                className="pt-input"
+                placeholder="Username"
+                value={this.state.email}
+                onChange={e => this.setState({ email: e.target.value })}
+                type="text"
+                dir="auto"
+              />
+            </div>
+          </div>
+          <div className="pt-form-group">
+            <label className="pt-label" for="password">
+              Password
+              <span className="pt-text-muted">(required)</span>
+            </label>
+            <div className="pt-form-content">
+              <input
+                id="password"
+                className="pt-input"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={e => this.setState({ password: e.target.value })}
+                type="text"
+                dir="auto"
+              />
+            </div>
+          </div>
+          <button
+            type="button"
+            disabled={!this.state.email || !this.state.password}
+            onClick={this.signinUser}
+            className="pt-button pt-intent-success pt-align-right"
+          >
+            Next step
+            <span className="pt-icon-standard pt-icon-arrow-right pt-align-right" />
+          </button>
+        </form>
+      </Aligner>
     );
   }
 

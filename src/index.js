@@ -13,6 +13,9 @@ import {
 } from "react-apollo";
 import "./index.css";
 import "@blueprintjs/core/dist/blueprint.css";
+import styled from "styled-components";
+
+const Container = styled.div`height: 100vh;`;
 
 const networkInterface = createNetworkInterface({
   uri: "https://api.graph.cool/simple/v1/cj60zjzb1jhfu0198t94wd7gr"
@@ -41,13 +44,13 @@ const client = new ApolloClient({ networkInterface });
 ReactDOM.render(
   <ApolloProvider client={client}>
     <Router>
-      <div>
+      <Container>
         <Nav />
-        <Route path="/" component={ListPage} />
         <Route path="/create" component={CreatePost} />
         <Route path="/login" component={LoginUser} />
         <Route path="/signup" component={CreateUser} />
-      </div>
+        <Route exact path="/" component={ListPage} />
+      </Container>
     </Router>
   </ApolloProvider>,
   document.getElementById("root")

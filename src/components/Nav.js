@@ -28,7 +28,7 @@ class Nav extends React.Component {
 
   renderLoggedIn() {
     return (
-      <nav className="pt-navbar .modifier">
+      <nav className="pt-navbar pt-fixed-top">
         <div className="pt-navbar-group pt-align-left">
           <div className="pt-navbar-heading">Kea</div>
         </div>
@@ -54,7 +54,7 @@ class Nav extends React.Component {
 
   renderLoggedOut() {
     return (
-      <nav className="pt-navbar .modifier">
+      <nav className="pt-navbar pt-fixed-top">
         <div className="pt-navbar-group pt-align-left">
           <div className="pt-navbar-heading">Kea</div>
         </div>
