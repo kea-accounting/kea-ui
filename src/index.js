@@ -1,9 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import App from "./App";
 import CreatePost from "./components/CreatePost";
 import CreateUser from "./components/CreateUser";
 import LoginUser from "./components/LoginUser";
+import ListPage from "./components/ListPage";
 import Nav from "./components/Nav";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import {
@@ -43,7 +43,7 @@ ReactDOM.render(
     <Router>
       <div>
         <Nav />
-        <Route path="/" component={App} />
+        <Route path="/" component={ListPage} />
         <Route path="/create" component={CreatePost} />
         <Route path="/login" component={LoginUser} />
         <Route path="/signup" component={CreateUser} />
