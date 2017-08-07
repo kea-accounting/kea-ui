@@ -2,13 +2,12 @@ import React from "react";
 import { graphql, gql } from "react-apollo";
 import { withRouter } from "react-router";
 import { Link } from "react-router-dom";
-import ListPage from "./containers/ListPage";
+import ListPage from "./components/ListPage";
 import NewPostLink from "./components/NewPostLink";
 import PropTypes from "prop-types";
 
 class App extends React.Component {
   static propTypes = {
-    router: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired
   };
 
