@@ -2,6 +2,14 @@ import React from "react";
 import { withRouter } from "react-router";
 import { graphql, gql } from "react-apollo";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+
+const Aligner = styled.div`
+  display: flex;
+  align-items: center;
+  height: 100%;
+  justify-content: center;
+`;
 
 class CreateUser extends React.Component {
   static propTypes = {
@@ -34,7 +42,7 @@ class CreateUser extends React.Component {
     }
 
     return (
-      <div className="w-100 pa4 flex justify-center">
+      <Aligner>
         <div style={{ maxWidth: 400 }} className="">
           <input
             className="w-100 pa3 mv2"
@@ -77,7 +85,7 @@ class CreateUser extends React.Component {
             </button>
           )}
         </div>
-      </div>
+      </Aligner>
     );
   }
 
