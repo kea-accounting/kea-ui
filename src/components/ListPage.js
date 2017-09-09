@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Cell, Column, Table, Utils } from "@blueprintjs/table";
+import { EditableCell, Column, Table, Utils } from "@blueprintjs/table";
 import styled from "styled-components";
 
 const REORDERABLE_TABLE_DATA = [
@@ -60,11 +60,17 @@ export default class ListPage extends React.Component {
     );
   }
 
-  renderLetterCell = row => <Cell>{this.state.data[row].letter}</Cell>;
-  renderFruitCell = row => <Cell>{this.state.data[row].fruit}</Cell>;
-  renderAnimalCell = row => <Cell>{this.state.data[row].animal}</Cell>;
-  renderCountryCell = row => <Cell>{this.state.data[row].country}</Cell>;
-  renderCityCell = row => <Cell>{this.state.data[row].city}</Cell>;
+  renderLetterCell = row => (
+    <EditableCell value={this.state.data[row].letter} />
+  );
+  renderFruitCell = row => <EditableCell value={this.state.data[row].fruit} />;
+  renderAnimalCell = row => (
+    <EditableCell value={this.state.data[row].animal} />
+  );
+  renderCountryCell = row => (
+    <EditableCell value={this.state.data[row].country} />
+  );
+  renderCityCell = row => <EditableCell value={this.state.data[row].city} />;
 
   handleColumnsReordered = (oldIndex, newIndex, length) => {
     if (oldIndex === newIndex) {
