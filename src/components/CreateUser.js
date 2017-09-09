@@ -43,48 +43,66 @@ class CreateUser extends React.Component {
 
     return (
       <Aligner>
-        <div style={{ maxWidth: 400 }} className="">
-          <input
-            className="w-100 pa3 mv2"
-            value={this.state.email}
-            placeholder="Email"
-            onChange={e => this.setState({ email: e.target.value })}
-          />
-          <input
-            className="w-100 pa3 mv2"
-            type="password"
-            value={this.state.password}
-            placeholder="Password"
-            onChange={e => this.setState({ password: e.target.value })}
-          />
-          <input
-            className="w-100 pa3 mv2"
-            value={this.state.name}
-            placeholder="Name"
-            onChange={e => this.setState({ name: e.target.value })}
-          />
-          <div>
-            <input
-              className="w-100 pa3 mv2"
-              value={this.state.emailSubscription}
-              type="checkbox"
-              onChange={e =>
-                this.setState({ emailSubscription: e.target.checked })}
-            />
-            <span>Subscribe to email notifications?</span>
+        <form>
+          <div className="pt-form-group">
+            <label className="pt-label" for="username">
+              Username
+              <span className="pt-text-muted">(required)</span>
+            </label>
+            <div className="pt-form-content">
+              <input
+                id="username"
+                className="pt-input"
+                placeholder="Email"
+                value={this.state.email}
+                onChange={e => this.setState({ email: e.target.value })}
+                type="text"
+                dir="auto"
+              />
+            </div>
           </div>
-
-          {this.state.name &&
-          this.state.email &&
-          this.state.password && (
-            <button
-              className="pa3 bg-black-10 bn dim ttu pointer"
-              onClick={this.createUser}
-            >
-              Log innn
-            </button>
-          )}
-        </div>
+          <div className="pt-form-group">
+            <label className="pt-label" for="username">
+              Password
+              <span className="pt-text-muted">(required)</span>
+            </label>
+            <div className="pt-form-content">
+              <input
+                id="password"
+                className="pt-input"
+                placeholder="Password"
+                value={this.state.password}
+                onChange={e => this.setState({ password: e.target.value })}
+                type="text"
+                dir="auto"
+              />
+            </div>
+          </div>
+          <div className="pt-form-group">
+            <label className="pt-label" for="username">
+              Name
+              <span className="pt-text-muted">(required)</span>
+            </label>
+            <div className="pt-form-content">
+              <input
+                id="name"
+                className="pt-input"
+                placeholder="Name"
+                value={this.state.name}
+                onChange={e => this.setState({ name: e.target.value })}
+                type="text"
+                dir="auto"
+              />
+            </div>
+          </div>
+          <button
+            className="pt-button pt-intent-success pt-align-right"
+            disabled={!this.state.email || !this.state.password}
+            onClick={this.createUser}
+          >
+            Sign Up
+          </button>
+        </form>
       </Aligner>
     );
   }
