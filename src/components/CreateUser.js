@@ -67,14 +67,15 @@ class CreateUser extends React.Component {
           </div>
 
           {this.state.name &&
-            this.state.email &&
-            this.state.password &&
+          this.state.email &&
+          this.state.password && (
             <button
               className="pa3 bg-black-10 bn dim ttu pointer"
               onClick={this.createUser}
             >
-              Log in
-            </button>}
+              Log innn
+            </button>
+          )}
         </div>
       </div>
     );
