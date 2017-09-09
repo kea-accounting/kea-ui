@@ -13,6 +13,7 @@ import {
 } from "react-apollo";
 import "./index.css";
 import "@blueprintjs/core/dist/blueprint.css";
+import "@blueprintjs/table/dist/table.css";
 import styled from "styled-components";
 
 const Container = styled.div`height: 100vh;`;

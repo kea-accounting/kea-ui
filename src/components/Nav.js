@@ -44,7 +44,7 @@ class Nav extends React.Component {
           <button className="pt-button pt-minimal pt-icon-notifications" />
           <button className="pt-button pt-minimal pt-icon-cog" />
           <button
-            className="pt-button pt-minimal pt-icon-logout"
+            className="pt-button pt-minimal pt-icon-log-out"
             onClick={this._logout}
           />
         </div>
