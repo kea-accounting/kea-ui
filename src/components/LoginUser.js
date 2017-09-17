@@ -1,26 +1,21 @@
 import React from "react";
-import { withRouter } from "react-router";
 import { graphql, gql } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Field, reduxForm, SubmissionError } from "redux-form";
 
 const Aligner = styled.div`
   display: flex;
   align-items: center;
+  text-align: center;
   height: 100%;
   justify-content: center;
 `;
 
 class CreateLogin extends React.Component {
   static propTypes = {
-    router: PropTypes.object.isRequired,
     signinUser: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired
-  };
-
-  state = {
-    email: "",
-    password: ""
   };
 
   render() {
@@ -36,21 +31,24 @@ class CreateLogin extends React.Component {
 
     return (
       <Aligner>
-        <form>
+        <form onSubmit={this.props.handleSubmit(this.signinUser)}>
+          {this.props.error && (
+            <div className="pt-callout pt-intent-danger">
+              <h5>Error</h5>
+              {this.props.error}
+            </div>
+          )}
           <div className="pt-form-group">
             <label className="pt-label" htmlFor="username">
               Username
               <span className="pt-text-muted">(required)</span>
             </label>
             <div className="pt-form-content">
-              <input
-                id="username"
-                className="pt-input"
-                placeholder="Username"
-                value={this.state.email}
-                onChange={e => this.setState({ email: e.target.value })}
+              <Field
+                name="email"
+                component="input"
                 type="text"
-                dir="auto"
+                className="pt-input"
               />
             </div>
           </div>
@@ -60,21 +58,16 @@ class CreateLogin extends React.Component {
               <span className="pt-text-muted">(required)</span>
             </label>
             <div className="pt-form-content">
-              <input
-                id="password"
+              <Field
+                name="password"
+                component="input"
+                type="password"
                 className="pt-input"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={e => this.setState({ password: e.target.value })}
-                type="text"
-                dir="auto"
               />
             </div>
           </div>
           <button
-            type="button"
-            disabled={!this.state.email || !this.state.password}
-            onClick={this.signinUser}
+            type="submit"
             className="pt-button pt-intent-success pt-align-right"
           >
             Next step
@@ -85,10 +78,10 @@ class CreateLogin extends React.Component {
     );
   }
 
-  signinUser = () => {
-    const { email, password } = this.state;
+  signinUser = details => {
+    const { email, password } = details;
 
-    this.props
+    return this.props
       .signinUser({ variables: { email, password } })
       .then(response => {
         window.localStorage.setItem(
@@ -99,9 +92,14 @@ class CreateLogin extends React.Component {
       })
       .catch(e => {
         console.error(e);
+        throw new SubmissionError({ _error: e.message });
       });
   };
 }
+
+const LoginForm = reduxForm({
+  form: "login"
+})(CreateLogin);
 
 const signinUser = gql`
   mutation($email: String!, $password: String!) {
@@ -120,7 +118,5 @@ const userQuery = gql`
 `;
 
 export default graphql(signinUser, { name: "signinUser" })(
-  graphql(userQuery, { options: { fetchPolicy: "network-only" } })(
-    withRouter(CreateLogin)
-  )
+  graphql(userQuery, { options: { fetchPolicy: "network-only" } })(LoginForm)
 );
