@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import CreatePost from "./components/CreatePost";
 import CreateUser from "./components/CreateUser";
 import LoginUser from "./components/LoginUser";
 import ListPage from "./components/ListPage";
@@ -64,7 +63,6 @@ ReactDOM.render(
     <Router>
       <Container>
         <Nav />
-        <Route path="/create" component={CreatePost} />
         <Route path="/login" component={LoginUser} />
         <Route path="/signup" component={CreateUser} />
         <Route exact path="/" component={ListPage} />
