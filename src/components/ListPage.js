@@ -47,8 +47,8 @@ export default class ListPage extends React.Component {
       <Aligner>
         <Table
           isColumnReorderable={true}
-          isColumnResizable={false}
-          isRowReorderable={true}
+          isColumnResizable={true}
+          isRowReorderable={false}
           isRowResizable={false}
           numRows={this.state.data.length}
           onColumnsReordered={this.handleColumnsReordered}
