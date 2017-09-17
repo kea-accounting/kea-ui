@@ -38,7 +38,7 @@ class CreateLogin extends React.Component {
       <Aligner>
         <form>
           <div className="pt-form-group">
-            <label className="pt-label" for="username">
+            <label className="pt-label" htmlFor="username">
               Username
               <span className="pt-text-muted">(required)</span>
             </label>
@@ -55,7 +55,7 @@ class CreateLogin extends React.Component {
             </div>
           </div>
           <div className="pt-form-group">
-            <label className="pt-label" for="password">
+            <label className="pt-label" htmlFor="password">
               Password
               <span className="pt-text-muted">(required)</span>
             </label>
@@ -99,7 +99,6 @@ class CreateLogin extends React.Component {
       })
       .catch(e => {
         console.error(e);
-        this.props.history.replace("/");
       });
   };
 }
