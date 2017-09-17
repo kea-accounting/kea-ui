@@ -1,34 +1,23 @@
 import React from "react";
-import { withRouter } from "react-router";
 import { graphql, gql } from "react-apollo";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import { Field, reduxForm, SubmissionError } from "redux-form";
 
 const Aligner = styled.div`
   display: flex;
   align-items: center;
+  text-align: center;
   height: 100%;
   justify-content: center;
 `;
 
 class CreateUser extends React.Component {
   static propTypes = {
-    router: PropTypes.object.isRequired,
     createUser: PropTypes.func.isRequired,
     signinUser: PropTypes.func.isRequired,
     data: PropTypes.object.isRequired
   };
-
-  constructor(props) {
-    super();
-
-    this.state = {
-      email: "",
-      password: "",
-      name: "",
-      emailSubscription: false
-    };
-  }
 
   render() {
     if (this.props.data.loading) {
@@ -43,62 +32,58 @@ class CreateUser extends React.Component {
 
     return (
       <Aligner>
-        <form>
+        <form onSubmit={this.props.handleSubmit(this.createUser)}>
+          {this.props.error && (
+            <div className="pt-callout pt-intent-danger">
+              <h5>Error</h5>
+              {this.props.error}
+            </div>
+          )}
           <div className="pt-form-group">
-            <label className="pt-label" for="username">
+            <label className="pt-label" htmlFor="email">
               Username
               <span className="pt-text-muted">(required)</span>
             </label>
             <div className="pt-form-content">
-              <input
-                id="username"
-                className="pt-input"
-                placeholder="Email"
-                value={this.state.email}
-                onChange={e => this.setState({ email: e.target.value })}
+              <Field
+                name="email"
+                component="input"
                 type="text"
-                dir="auto"
+                className="pt-input"
               />
             </div>
           </div>
           <div className="pt-form-group">
-            <label className="pt-label" for="username">
+            <label className="pt-label" htmlFor="password">
               Password
               <span className="pt-text-muted">(required)</span>
             </label>
             <div className="pt-form-content">
-              <input
-                id="password"
+              <Field
+                name="password"
+                component="input"
+                type="password"
                 className="pt-input"
-                placeholder="Password"
-                value={this.state.password}
-                onChange={e => this.setState({ password: e.target.value })}
-                type="text"
-                dir="auto"
               />
             </div>
           </div>
           <div className="pt-form-group">
-            <label className="pt-label" for="username">
+            <label className="pt-label" htmlFor="name">
               Name
               <span className="pt-text-muted">(required)</span>
             </label>
             <div className="pt-form-content">
-              <input
-                id="name"
-                className="pt-input"
-                placeholder="Name"
-                value={this.state.name}
-                onChange={e => this.setState({ name: e.target.value })}
+              <Field
+                name="name"
+                component="input"
                 type="text"
-                dir="auto"
+                className="pt-input"
               />
             </div>
           </div>
           <button
             className="pt-button pt-intent-success pt-align-right"
-            disabled={!this.state.email || !this.state.password}
-            onClick={this.createUser}
+            type="submit"
           >
             Sign Up
           </button>
@@ -107,11 +92,13 @@ class CreateUser extends React.Component {
     );
   }
 
-  createUser = () => {
-    const { email, password, name, emailSubscription } = this.state;
+  createUser = details => {
+    const { email, password, name } = details;
 
-    this.props
-      .createUser({ variables: { email, password, name, emailSubscription } })
+    return this.props
+      .createUser({
+        variables: { email, password, name, emailSubscription: false }
+      })
       .then(response => {
         this.props
           .signinUser({ variables: { email, password } })
@@ -124,15 +111,19 @@ class CreateUser extends React.Component {
           })
           .catch(e => {
             console.error(e);
-            this.props.history.replace("/");
+            throw new SubmissionError({ _error: e.message });
           });
       })
       .catch(e => {
         console.error(e);
-        this.props.history.replace("/");
+        throw new SubmissionError({ _error: e.message });
       });
   };
 }
+
+const SignupForm = reduxForm({
+  form: "login"
+})(CreateUser);
 
 const createUser = gql`
   mutation(
@@ -169,6 +160,6 @@ const userQuery = gql`
 
 export default graphql(createUser, { name: "createUser" })(
   graphql(userQuery, { options: { fetchPolicy: "network-only" } })(
-    graphql(signinUser, { name: "signinUser" })(withRouter(CreateUser))
+    graphql(signinUser, { name: "signinUser" })(SignupForm)
   )
 );
