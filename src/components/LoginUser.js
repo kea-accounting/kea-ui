@@ -89,6 +89,7 @@ class CreateLogin extends React.Component {
           response.data.signinUser.token
         );
         this.props.history.replace("/");
+        window.location.reload();
       })
       .catch(e => {
         console.error(e);
