@@ -6,6 +6,8 @@ import LoginUser from "./components/LoginUser";
 import ListPage from "./components/ListPage";
 import Nav from "./components/Nav";
 import { BrowserRouter as Router, Route } from "react-router-dom";
+import { createStore, combineReducers, applyMiddleware, compose } from "redux";
+import { reducer as formReducer } from "redux-form";
 import {
   ApolloClient,
   ApolloProvider,
@@ -42,8 +44,23 @@ networkInterface.use([
 
 const client = new ApolloClient({ networkInterface });
 
+const store = createStore(
+  combineReducers({
+    form: formReducer,
+    apollo: client.reducer()
+  }),
+  {}, // initial state
+  compose(
+    applyMiddleware(client.middleware()),
+    // If you are using the devToolsExtension, you can add it here also
+    typeof window.__REDUX_DEVTOOLS_EXTENSION__ !== "undefined"
+      ? window.__REDUX_DEVTOOLS_EXTENSION__()
+      : f => f
+  )
+);
+
 ReactDOM.render(
-  <ApolloProvider client={client}>
+  <ApolloProvider client={client} store={store}>
     <Router>
       <Container>
         <Nav />

@@ -10,9 +10,12 @@
     "react-addons-css-transition-group": "^15.6.0",
     "react-apollo": "^1.4.15",
     "react-dom": "^15.6.1",
+    "react-redux": "^5.0.6",
     "react-router": "^4.2.0",
     "react-router-dom": "^4.2.2",
     "react-scripts": "^1.0.13",
+    "redux": "^3.7.2",
+    "redux-form": "^7.0.4",
     "styled-components": "^2.1.2"
   },
   "scripts": {
